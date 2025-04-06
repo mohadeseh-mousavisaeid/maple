@@ -3428,6 +3428,22 @@
         "documentation": {}
     },
     {
+        "label": "find_packages",
+        "importPath": "setuptools",
+        "description": "setuptools",
+        "isExtraImport": true,
+        "detail": "setuptools",
+        "documentation": {}
+    },
+    {
+        "label": "setup",
+        "importPath": "setuptools",
+        "description": "setuptools",
+        "isExtraImport": true,
+        "detail": "setuptools",
+        "documentation": {}
+    },
+    {
         "label": "sphinx_rtd_theme",
         "kind": 6,
         "isExtraImport": true,
@@ -6063,6 +6079,66 @@
         "description": "gym.core",
         "isExtraImport": true,
         "detail": "gym.core",
+        "documentation": {}
+    },
+    {
+        "label": "AttrDict",
+        "importPath": "viskit.core",
+        "description": "viskit.core",
+        "isExtraImport": true,
+        "detail": "viskit.core",
+        "documentation": {}
+    },
+    {
+        "label": "matplotlib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "matplotlib",
+        "description": "matplotlib",
+        "detail": "matplotlib",
+        "documentation": {}
+    },
+    {
+        "label": "flask",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "flask",
+        "description": "flask",
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "core",
+        "importPath": "viskit",
+        "description": "viskit",
+        "isExtraImport": true,
+        "detail": "viskit",
+        "documentation": {}
+    },
+    {
+        "label": "tools",
+        "importPath": "plotly",
+        "description": "plotly",
+        "isExtraImport": true,
+        "detail": "plotly",
+        "documentation": {}
+    },
+    {
+        "label": "plotly.offline",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "plotly.offline",
+        "description": "plotly.offline",
+        "detail": "plotly.offline",
+        "documentation": {}
+    },
+    {
+        "label": "plotly.graph_objs",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "plotly.graph_objs",
+        "description": "plotly.graph_objs",
+        "detail": "plotly.graph_objs",
         "documentation": {}
     },
     {
@@ -12615,6 +12691,420 @@
         "description": "robosuite.setup",
         "peekOfCode": "long_description = ''.join(lines)\nsetup(\n    name=\"robosuite\",\n    packages=[\n        package for package in find_packages() if package.startswith(\"robosuite\")\n    ],\n    install_requires=[\n        \"numpy>=1.13.3\",\n        \"numba>=0.49.1\",\n        \"scipy>=1.2.3\",",
         "detail": "robosuite.setup",
+        "documentation": {}
+    },
+    {
+        "label": "AttrDict",
+        "kind": 6,
+        "importPath": "viskit.viskit.core",
+        "description": "viskit.viskit.core",
+        "peekOfCode": "class AttrDict(dict):\n    def __init__(self, *args, **kwargs):\n        super(AttrDict, self).__init__(*args, **kwargs)\n        self.__dict__ = self\ndef unique(l):\n    return list(set(l))\ndef flatten(l):\n    return [item for sublist in l for item in sublist]\ndef load_progress(progress_csv_path):\n    print(\"Reading %s\" % progress_csv_path)",
+        "detail": "viskit.viskit.core",
+        "documentation": {}
+    },
+    {
+        "label": "Selector",
+        "kind": 6,
+        "importPath": "viskit.viskit.core",
+        "description": "viskit.viskit.core",
+        "peekOfCode": "class Selector(object):\n    def __init__(self, exps_data, filters=None, custom_filters=None):\n        self._exps_data = exps_data\n        if filters is None:\n            self._filters = tuple()\n        else:\n            self._filters = tuple(filters)\n        if custom_filters is None:\n            self._custom_filters = []\n        else:",
+        "detail": "viskit.viskit.core",
+        "documentation": {}
+    },
+    {
+        "label": "unique",
+        "kind": 2,
+        "importPath": "viskit.viskit.core",
+        "description": "viskit.viskit.core",
+        "peekOfCode": "def unique(l):\n    return list(set(l))\ndef flatten(l):\n    return [item for sublist in l for item in sublist]\ndef load_progress(progress_csv_path):\n    print(\"Reading %s\" % progress_csv_path)\n    entries = dict()\n    if progress_csv_path.split('.')[-1] == \"csv\":\n        delimiter = ','\n    else:",
+        "detail": "viskit.viskit.core",
+        "documentation": {}
+    },
+    {
+        "label": "flatten",
+        "kind": 2,
+        "importPath": "viskit.viskit.core",
+        "description": "viskit.viskit.core",
+        "peekOfCode": "def flatten(l):\n    return [item for sublist in l for item in sublist]\ndef load_progress(progress_csv_path):\n    print(\"Reading %s\" % progress_csv_path)\n    entries = dict()\n    if progress_csv_path.split('.')[-1] == \"csv\":\n        delimiter = ','\n    else:\n        delimiter = '\\t'\n    with open(progress_csv_path, 'r') as csvfile:",
+        "detail": "viskit.viskit.core",
+        "documentation": {}
+    },
+    {
+        "label": "load_progress",
+        "kind": 2,
+        "importPath": "viskit.viskit.core",
+        "description": "viskit.viskit.core",
+        "peekOfCode": "def load_progress(progress_csv_path):\n    print(\"Reading %s\" % progress_csv_path)\n    entries = dict()\n    if progress_csv_path.split('.')[-1] == \"csv\":\n        delimiter = ','\n    else:\n        delimiter = '\\t'\n    with open(progress_csv_path, 'r') as csvfile:\n        reader = csv.DictReader(csvfile, delimiter=delimiter)\n        for row in reader:",
+        "detail": "viskit.viskit.core",
+        "documentation": {}
+    },
+    {
+        "label": "to_json",
+        "kind": 2,
+        "importPath": "viskit.viskit.core",
+        "description": "viskit.viskit.core",
+        "peekOfCode": "def to_json(stub_object):\n    from rllab.misc.instrument import StubObject\n    from rllab.misc.instrument import StubAttr\n    if isinstance(stub_object, StubObject):\n        assert len(stub_object.args) == 0\n        data = dict()\n        for k, v in stub_object.kwargs.items():\n            data[k] = to_json(v)\n        data[\"_name\"] = stub_object.proxy_class.__module__ + \\\n                        \".\" + stub_object.proxy_class.__name__",
+        "detail": "viskit.viskit.core",
+        "documentation": {}
+    },
+    {
+        "label": "flatten_dict",
+        "kind": 2,
+        "importPath": "viskit.viskit.core",
+        "description": "viskit.viskit.core",
+        "peekOfCode": "def flatten_dict(d):\n    flat_params = dict()\n    for k, v in d.items():\n        if isinstance(v, dict):\n            v = flatten_dict(v)\n            for subk, subv in flatten_dict(v).items():\n                flat_params[k + \".\" + subk] = subv\n        else:\n            flat_params[k] = v\n    return flat_params",
+        "detail": "viskit.viskit.core",
+        "documentation": {}
+    },
+    {
+        "label": "load_params",
+        "kind": 2,
+        "importPath": "viskit.viskit.core",
+        "description": "viskit.viskit.core",
+        "peekOfCode": "def load_params(params_json_path):\n    with open(params_json_path, 'r') as f:\n        data = json.loads(f.read())\n        if \"args_data\" in data:\n            del data[\"args_data\"]\n        if \"exp_name\" not in data:\n            data[\"exp_name\"] = params_json_path.split(\"/\")[-2]\n    return data\ndef lookup(d, keys):\n    if not isinstance(keys, list):",
+        "detail": "viskit.viskit.core",
+        "documentation": {}
+    },
+    {
+        "label": "lookup",
+        "kind": 2,
+        "importPath": "viskit.viskit.core",
+        "description": "viskit.viskit.core",
+        "peekOfCode": "def lookup(d, keys):\n    if not isinstance(keys, list):\n        keys = keys.split(\".\")\n    for k in keys:\n        if hasattr(d, \"__getitem__\"):\n            if k in d:\n                d = d[k]\n            else:\n                return None\n        else:",
+        "detail": "viskit.viskit.core",
+        "documentation": {}
+    },
+    {
+        "label": "load_exps_data",
+        "kind": 2,
+        "importPath": "viskit.viskit.core",
+        "description": "viskit.viskit.core",
+        "peekOfCode": "def load_exps_data(\n        exp_folder_paths,\n        data_filename='progress.csv',\n        params_filename='params.json',\n        disable_variant=False,\n):\n    exps = []\n    for exp_folder_path in exp_folder_paths:\n        exps += [x[0] for x in os.walk(exp_folder_path)]\n    exps_data = []",
+        "detail": "viskit.viskit.core",
+        "documentation": {}
+    },
+    {
+        "label": "smart_repr",
+        "kind": 2,
+        "importPath": "viskit.viskit.core",
+        "description": "viskit.viskit.core",
+        "peekOfCode": "def smart_repr(x):\n    if isinstance(x, tuple):\n        if len(x) == 0:\n            return \"tuple()\"\n        elif len(x) == 1:\n            return \"(%s,)\" % smart_repr(x[0])\n        else:\n            return \"(\" + \",\".join(map(smart_repr, x)) + \")\"\n    elif isinstance(x, list):\n        if len(x) == 0:",
+        "detail": "viskit.viskit.core",
+        "documentation": {}
+    },
+    {
+        "label": "smart_eval",
+        "kind": 2,
+        "importPath": "viskit.viskit.core",
+        "description": "viskit.viskit.core",
+        "peekOfCode": "def smart_eval(string):\n    string = string.replace(',inf)', ',\"inf\")')\n    return eval(string)\ndef extract_distinct_params(exps_data, excluded_params=('seed', 'log_dir'), l=1):\n    # all_pairs = unique(flatten([d.flat_params.items() for d in exps_data]))\n    # if logger:\n    #     logger(\"(Excluding {excluded})\".format(excluded=', '.join(excluded_params)))\n    # def cmp(x,y):\n    #     if x < y:\n    #         return -1",
+        "detail": "viskit.viskit.core",
+        "documentation": {}
+    },
+    {
+        "label": "extract_distinct_params",
+        "kind": 2,
+        "importPath": "viskit.viskit.core",
+        "description": "viskit.viskit.core",
+        "peekOfCode": "def extract_distinct_params(exps_data, excluded_params=('seed', 'log_dir'), l=1):\n    # all_pairs = unique(flatten([d.flat_params.items() for d in exps_data]))\n    # if logger:\n    #     logger(\"(Excluding {excluded})\".format(excluded=', '.join(excluded_params)))\n    # def cmp(x,y):\n    #     if x < y:\n    #         return -1\n    #     elif x > y:\n    #         return 1\n    #     else:",
+        "detail": "viskit.viskit.core",
+        "documentation": {}
+    },
+    {
+        "label": "exp_has_key_value",
+        "kind": 2,
+        "importPath": "viskit.viskit.core",
+        "description": "viskit.viskit.core",
+        "peekOfCode": "def exp_has_key_value(exp, k, v):\n    return (\n        str(exp.flat_params.get(k, None)) == str(v)\n        # TODO: include this?\n        or (k not in exp.flat_params)\n    )\nclass Selector(object):\n    def __init__(self, exps_data, filters=None, custom_filters=None):\n        self._exps_data = exps_data\n        if filters is None:",
+        "detail": "viskit.viskit.core",
+        "documentation": {}
+    },
+    {
+        "label": "hex_to_rgb",
+        "kind": 2,
+        "importPath": "viskit.viskit.core",
+        "description": "viskit.viskit.core",
+        "peekOfCode": "def hex_to_rgb(hex, opacity=1.0):\n    if hex[0] == '#':\n        hex = hex[1:]\n    assert (len(hex) == 6)\n    return \"rgba({0},{1},{2},{3})\".format(int(hex[:2], 16), int(hex[2:4], 16), int(hex[4:6], 16), opacity)",
+        "detail": "viskit.viskit.core",
+        "documentation": {}
+    },
+    {
+        "label": "color_defaults",
+        "kind": 5,
+        "importPath": "viskit.viskit.core",
+        "description": "viskit.viskit.core",
+        "peekOfCode": "color_defaults = [\n    '#1f77b4',  # muted blue\n    '#ff7f0e',  # safety orange\n    '#2ca02c',  # cooked asparagus green\n    '#d62728',  # brick red\n    '#9467bd',  # muted purple\n    '#8c564b',  # chestnut brown\n    '#e377c2',  # raspberry yogurt pink\n    '#7f7f7f',  # middle gray\n    '#bcbd22',  # curry yellow-green",
+        "detail": "viskit.viskit.core",
+        "documentation": {}
+    },
+    {
+        "label": "flatten",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def flatten(xs):\n    return [x for y in xs for x in y]\ndef sliding_mean(data_array, window=5):\n    data_array = np.array(data_array)\n    new_list = []\n    for i in range(len(data_array)):\n        indices = list(range(max(i - window + 1, 0),\n                             min(i + window + 1, len(data_array))))\n        avg = 0\n        for j in indices:",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "sliding_mean",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def sliding_mean(data_array, window=5):\n    data_array = np.array(data_array)\n    new_list = []\n    for i in range(len(data_array)):\n        indices = list(range(max(i - window + 1, 0),\n                             min(i + window + 1, len(data_array))))\n        avg = 0\n        for j in indices:\n            avg += data_array[j]\n        avg /= float(len(indices))",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "send_js",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def send_js(path):\n    return flask.send_from_directory('js', path)\n@app.route('/css/<path:path>')\ndef send_css(path):\n    return flask.send_from_directory('css', path)\ndef create_bar_chart(\n        plot_lists,\n        use_median=False,\n        plot_width=None,\n        plot_height=None,",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "send_css",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def send_css(path):\n    return flask.send_from_directory('css', path)\ndef create_bar_chart(\n        plot_lists,\n        use_median=False,\n        plot_width=None,\n        plot_height=None,\n        title=None,\n        value_i=-1,\n    ):",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "create_bar_chart",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def create_bar_chart(\n        plot_lists,\n        use_median=False,\n        plot_width=None,\n        plot_height=None,\n        title=None,\n        value_i=-1,\n    ):\n    \"\"\"\n    plot_lists is a list of lists.",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "make_plot",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def make_plot(\n        plot_lists,\n        use_median=False,\n        plot_width=None,\n        plot_height=None,\n        title=None,\n    ):\n    \"\"\"\n    plot_lists is a list of lists.\n    Each outer list represents different y-axis attributes.",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "make_plot_eps",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def make_plot_eps(plot_list, use_median=False, counter=0):\n    import matplotlib.pyplot as _plt\n    f, ax = _plt.subplots(figsize=(8, 5))\n    for idx, plt in enumerate(plot_list):\n        color = core.color_defaults[idx % len(core.color_defaults)]\n        if use_median:\n            x = list(range(len(plt.percentile50)))\n            y = list(plt.percentile50)\n            y_upper = list(plt.percentile75)\n            y_lower = list(plt.percentile25)",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "summary_name",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def summary_name(exp, selector=None):\n    # if selector is not None:\n    #     exclude_params = set([x[0] for x in selector._filters])\n    # else:\n    #     exclude_params = set()\n    # rest_params = set([x[0] for x in distinct_params]).difference(exclude_params)\n    # if len(rest_params) > 0:\n    #     name = \"\"\n    #     for k in rest_params:\n    #         name += \"%s=%s;\" % (k.split(\".\")[-1], str(exp.flat_params.get(k, \"\")).split(\".\")[-1])",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "check_nan",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def check_nan(exp):\n    return all(\n        not np.any(np.isnan(vals)) for vals in list(exp.progress.values()))\ndef get_plot_instruction(\n        plot_keys,\n        x_keys=None,\n        split_keys=None,\n        group_keys=None,\n        best_filter_key=None,\n        filters=None,",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "get_plot_instruction",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def get_plot_instruction(\n        plot_keys,\n        x_keys=None,\n        split_keys=None,\n        group_keys=None,\n        best_filter_key=None,\n        filters=None,\n        exclusions=None,\n        use_median=False,\n        only_show_best=False,",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "shorten_key",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def shorten_key(key):\n    \"\"\"\n    Convert a dot-map string like \"foo.bar.baz\" into \"f.b.baz\"\n    \"\"\"\n    *heads, tail = key.split(\".\")\n    new_key_builder = []\n    for subkey in heads:\n        if len(subkey) > 0:\n            new_key_builder.append(subkey[0])\n    new_key_builder.append(tail)",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "get_selector_score",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def get_selector_score(key, selector, use_median, best_based_on_final):\n    \"\"\"\n    :param key: Thing to measure (e.g. Average Returns, Loss, etc.)\n    :param selector: Selector instance\n    :param use_median: Use the median? Else use the mean\n    :param best_based_on_final: Only look at the final value? Else use all\n    values.\n    :return: A single number that gives the score of `key` inside `selector`\n    \"\"\"\n    data = selector.extract()",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "get_statistics",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def get_statistics(progresses, use_median, normalize_errors):\n    \"\"\"\n    Get some dictionary of statistics (e.g. the median, mean).\n    :param progresses:\n    :param use_median:\n    :param normalize_errors:\n    :return:\n    \"\"\"\n    if use_median:\n        return dict(",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "process_statistics",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def process_statistics(\n        statistics,\n        smooth_curve,\n        clip_plot_value,\n        window_size\n):\n    \"\"\"\n    Smoothen and clip time-series data.\n    \"\"\"\n    clean_statistics = {}",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "get_possible_values",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def get_possible_values(distinct_params, key):\n    return [vs for k, vs in distinct_params if k == key][0]\ndef split_by_key(selector, key, distinct_params):\n    \"\"\"\n    Return a list of selectors based on this selector.\n    Each selector represents one distinct value of `key`.\n    \"\"\"\n    values = get_possible_values(distinct_params, key)\n    return [selector.where(key, v) for v in values]\ndef split_by_keys(base_selector, keys, distinct_params):",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "split_by_key",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def split_by_key(selector, key, distinct_params):\n    \"\"\"\n    Return a list of selectors based on this selector.\n    Each selector represents one distinct value of `key`.\n    \"\"\"\n    values = get_possible_values(distinct_params, key)\n    return [selector.where(key, v) for v in values]\ndef split_by_keys(base_selector, keys, distinct_params):\n    \"\"\"\n    Return a list of selectors based on the base_selector.",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "split_by_keys",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def split_by_keys(base_selector, keys, distinct_params):\n    \"\"\"\n    Return a list of selectors based on the base_selector.\n    Each selector represents one distinct set of values for each key in `keys`.\n    :param base_selector:\n    :param keys:\n    :param distinct_params:\n    :return:\n    \"\"\"\n    list_of_key_and_unique_value = [",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "parse_float_arg",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def parse_float_arg(args, key):\n    x = args.get(key, \"\")\n    try:\n        return float(x)\n    except Exception:\n        return None\n@app.route(\"/plot_div\")\ndef plot_div():\n    args = flask.request.args\n    plot_keys_json = args.get(\"plot_keys\")",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "plot_div",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def plot_div():\n    args = flask.request.args\n    plot_keys_json = args.get(\"plot_keys\")\n    plot_keys = json.loads(plot_keys_json)\n    x_keys_json = args.get(\"x_keys\")\n    x_keys = json.loads(x_keys_json)\n    split_keys_json = args.get(\"split_keys\", \"[]\")\n    split_keys = json.loads(split_keys_json)\n    group_keys_json = args.get(\"group_keys\", \"[]\")\n    group_keys = json.loads(group_keys_json)",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "safer_eval",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def safer_eval(some_string):\n    \"\"\"\n    Not full-proof, but taking advice from:\n    https://nedbatchelder.com/blog/201206/eval_really_is_dangerous.html\n    \"\"\"\n    if \"__\" in some_string or \"import\" in some_string:\n        raise Exception(\"string to eval looks suspicious\")\n    return eval(some_string, {'__builtins__': {}})\n@app.route(\"/\")\ndef index():",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "index",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def index():\n    if \"AverageReturn\" in plottable_keys:\n        plot_keys = [\"AverageReturn\"]\n    elif 'training/return-average' in plottable_keys:\n        plot_keys = ['training/return-average']\n    elif len(plottable_keys) > 0:\n        plot_keys = plottable_keys[0:1]\n    else:\n        plot_keys = None\n    plot_div = get_plot_instruction(plot_keys=plot_keys)",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "reload",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def reload():\n    reload_data()\n    return 'Reloaded'\ndef reload_data():\n    global exps_data\n    global plottable_keys\n    global distinct_params\n    exps_data = core.load_exps_data(\n        args.data_paths,\n        args.data_filename,",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "reload_data",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def reload_data():\n    global exps_data\n    global plottable_keys\n    global distinct_params\n    exps_data = core.load_exps_data(\n        args.data_paths,\n        args.data_filename,\n        args.params_filename,\n        args.disable_variant,\n    )",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "def main():\n    global args\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"data_paths\", type=str, nargs='*')\n    parser.add_argument(\"--prefix\", type=str, nargs='?', default=\"???\")\n    parser.add_argument(\"--debug\", action=\"store_true\", default=False)\n    parser.add_argument(\"--port\", type=int, default=5000)\n    parser.add_argument(\"--disable-variant\", default=False, action='store_true')\n    parser.add_argument(\"--data-filename\",\n                        default='progress.csv',",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "named_colors",
+        "kind": 5,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "named_colors = [\n    'dodgerblue',\n    'darkorange',\n    'green',\n    'cyan',\n    'magenta',\n    'orange',\n    'yellow',\n    'black',\n    'blue',",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "app = flask.Flask(__name__, static_url_path='/static')\nexps_data = None\nplottable_keys = None\ndistinct_params = None\n@app.route('/js/<path:path>')\ndef send_js(path):\n    return flask.send_from_directory('js', path)\n@app.route('/css/<path:path>')\ndef send_css(path):\n    return flask.send_from_directory('css', path)",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "exps_data",
+        "kind": 5,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "exps_data = None\nplottable_keys = None\ndistinct_params = None\n@app.route('/js/<path:path>')\ndef send_js(path):\n    return flask.send_from_directory('js', path)\n@app.route('/css/<path:path>')\ndef send_css(path):\n    return flask.send_from_directory('css', path)\ndef create_bar_chart(",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "plottable_keys",
+        "kind": 5,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "plottable_keys = None\ndistinct_params = None\n@app.route('/js/<path:path>')\ndef send_js(path):\n    return flask.send_from_directory('js', path)\n@app.route('/css/<path:path>')\ndef send_css(path):\n    return flask.send_from_directory('css', path)\ndef create_bar_chart(\n        plot_lists,",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "distinct_params",
+        "kind": 5,
+        "importPath": "viskit.viskit.frontend",
+        "description": "viskit.viskit.frontend",
+        "peekOfCode": "distinct_params = None\n@app.route('/js/<path:path>')\ndef send_js(path):\n    return flask.send_from_directory('js', path)\n@app.route('/css/<path:path>')\ndef send_css(path):\n    return flask.send_from_directory('css', path)\ndef create_bar_chart(\n        plot_lists,\n        use_median=False,",
+        "detail": "viskit.viskit.frontend",
+        "documentation": {}
+    },
+    {
+        "label": "REQUIRED_PACKAGES",
+        "kind": 5,
+        "importPath": "viskit.setup",
+        "description": "viskit.setup",
+        "peekOfCode": "REQUIRED_PACKAGES = ['Flask==2.0.1', 'matplotlib', 'plotly==5.1.0', 'numpy', 'Jinja2>=3.0']\nsetup(name='viskit',\n    version='0.1',\n    install_requires=REQUIRED_PACKAGES,\n    include_package_data=True,\n    package_data={\n        'viskit': ['static/css/*', 'static/js/*', 'templates/main.html'],\n    },\n    packages=[p for p in find_packages() if p.startswith('viskit')],\n    description=\"rllab's viskit with some added features\")",
+        "detail": "viskit.setup",
         "documentation": {}
     }
 ]

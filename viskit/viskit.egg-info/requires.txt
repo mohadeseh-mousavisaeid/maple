@@ -1,0 +1,5 @@
+Flask==2.0.1
+matplotlib
+plotly==5.1.0
+numpy
+Jinja2>=3.0
