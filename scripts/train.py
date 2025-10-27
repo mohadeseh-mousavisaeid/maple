@@ -3,7 +3,7 @@ import argparse
 from maple.launchers.launcher_util import run_experiment
 from maple.launchers.robosuite_launcher import experiment
 import maple.util.hyperparameter as hyp
-import collections
+from collections.abc import Mapping
 
 base_variant = dict(
     layer_size=256,
@@ -12,22 +12,22 @@ base_variant = dict(
         terminals_all_false=True,
     ),
     algorithm_kwargs=dict(
-        num_epochs=10000,
-        num_expl_steps_per_train_loop=3000,
-        num_eval_steps_per_epoch=3000,
-        num_trains_per_train_loop=1000,
-        min_num_steps_before_training=30000,
-        max_path_length=150,
-        batch_size=1024,
+        num_epochs=1000,
+        num_expl_steps_per_train_loop=5000, # M episodes
+        num_eval_steps_per_epoch=3000, # N iterations 
+        num_trains_per_train_loop=2000, # K training steps
+        min_num_steps_before_training=10000,
+        max_path_length=200,
+        batch_size=512,
         eval_epoch_freq=10,
     ),
     trainer_kwargs=dict(
         discount=0.99,
         soft_target_tau=1e-3,
         target_update_period=1,
-        policy_lr=3e-5,
-        qf_lr=3e-5,
-        reward_scale=1,
+        policy_lr=3e-4,
+        qf_lr=3e-4,
+        reward_scale=3,
         use_automatic_entropy_tuning=True,
     ),
     ll_sac_variant=dict(
@@ -175,6 +175,9 @@ env_params = dict(
     stack={
         'env_variant.env_type': ['Stack'],
     },
+    stack_three={
+        'env_variant.env_type': ['StackThree'],
+    },
     nut={
         'env_variant.env_type': ['NutAssemblyRound'],
         'env_variant.env_kwargs.skill_config.grasp_config.aff_threshold': [0.06],
@@ -215,7 +218,7 @@ def deep_update(source, overrides):
     Copied from https://stackoverflow.com/questions/3232943/update-value-of-a-nested-dictionary-of-varying-depth
     """
     for key, value in overrides.items():
-        if isinstance(value, collections.Mapping) and value:
+        if isinstance(value, Mapping) and value:
             returned = deep_update(source.get(key, {}), value)
             source[key] = returned
         else:

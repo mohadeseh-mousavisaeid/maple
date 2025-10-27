@@ -105,17 +105,48 @@ def dump_video(
             print(i, time.time() - start)
 
     for i in range(len(frames)):
+        if len(frames[i]) == 0:
+            print(f"Skipping video for path {i} due to no frames.")
+            continue
         last_img = frames[i][-1]
         for _ in range(horizon - len(frames[i])):
             frames[i].append(last_img)
 
+    # frames = np.array(frames, dtype=np.uint8)
+    # path_length = frames.size // (
+    #         N * (H + 2 * pad_length) * (W + 2 * pad_length) * num_channels
+    # )
+    # frames = np.array(frames, dtype=np.uint8).reshape(
+    #     (N, path_length, H + 2 * pad_length, W + 2 * pad_length, num_channels)
+    # )
+
+    # Remove empty frame lists
+    frames = [f for f in frames if len(f) > 0]
+
+    if len(frames) == 0:
+        print("No videos to save — all paths were empty.")
+        return
+
+    # Get the longest frame sequence
+    max_len = max(len(seq) for seq in frames)
+    frame_shape = frames[0][0].shape  # (H+2pad, W+2pad, C)
+
+    # Pad shorter sequences with blank frames
+    for i in range(len(frames)):
+        while len(frames[i]) < max_len:
+            blank_frame = np.zeros_like(frames[i][0], dtype=np.uint8)
+            frames[i].append(blank_frame)
+
+    # Convert to array and reshape
     frames = np.array(frames, dtype=np.uint8)
-    path_length = frames.size // (
-            N * (H + 2 * pad_length) * (W + 2 * pad_length) * num_channels
+    frames = frames.reshape(
+        (len(frames), max_len, H + 2 * pad_length, W + 2 * pad_length, num_channels)
     )
-    frames = np.array(frames, dtype=np.uint8).reshape(
-        (N, path_length, H + 2 * pad_length, W + 2 * pad_length, num_channels)
-    )
+
+    path_length = frames.shape[1]
+
+
+
     f1 = []
     for k1 in range(columns):
         f2 = []

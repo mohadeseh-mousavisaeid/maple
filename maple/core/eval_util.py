@@ -16,6 +16,9 @@ def get_generic_path_information(paths, stat_prefix=''):
     Get an OrderedDict with a bunch of statistic names and values.
     """
     statistics = OrderedDict()
+    for i, path in enumerate(paths):
+     print(f"[{i}] path['rewards']: type={type(path['rewards'])}, value={path['rewards']}")  
+    
     returns = [sum(path["rewards"]) for path in paths]
 
     rewards = np.vstack([path["rewards"] for path in paths])
@@ -23,11 +26,36 @@ def get_generic_path_information(paths, stat_prefix=''):
                                                 stat_prefix=stat_prefix))
     statistics.update(create_stats_ordered_dict('Returns', returns,
                                                 stat_prefix=stat_prefix))
-    actions = [path["actions"] for path in paths]
-    if len(actions[0].shape) == 1:
-        actions = np.hstack([path["actions"] for path in paths])
+    # actions = [path["actions"] for path in paths]
+    # if len(actions[0].shape) == 1:
+    #     actions = np.hstack([path["actions"] for path in paths])
+    # else:
+    #     actions = np.vstack([path["actions"] for path in paths])
+    
+    actions = []
+    expected_dim = None
+    for path in paths:
+        act = np.array(path["actions"])
+        if act.ndim == 1:
+            act = act[:, None]  # make it (T, 1)
+        if expected_dim is None:
+            expected_dim = act.shape[1]
+        elif act.shape[1] != expected_dim:
+            print(f"Skipping path with unexpected action dim: {act.shape}")
+            continue
+        actions.append(act)
+
+    if actions:
+        actions = np.vstack(actions)
+        statistics.update(create_stats_ordered_dict('Actions', actions, stat_prefix=stat_prefix))
     else:
-        actions = np.vstack([path["actions"] for path in paths])
+        print("Warning: No valid action arrays to log.")
+
+    
+    
+    
+    
+    
     statistics.update(create_stats_ordered_dict(
         'Actions', actions, stat_prefix=stat_prefix
     ))
@@ -46,9 +74,17 @@ def get_generic_path_information(paths, stat_prefix=''):
                 for p in paths
             ]
             for k in all_env_infos[0].keys():
-                final_ks = np.array([info[k][-1] for info in all_env_infos])
-                first_ks = np.array([info[k][0] for info in all_env_infos])
-                all_ks = np.concatenate([info[k] for info in all_env_infos])
+                # final_ks = np.array([info[k][-1] for info in all_env_infos])
+                # first_ks = np.array([info[k][0] for info in all_env_infos])
+                # all_ks = np.concatenate([info[k] for info in all_env_infos])
+                try:
+                    final_ks = np.array([info[k][-1] for info in all_env_infos if k in info and len(info[k]) > 0])
+                    first_ks = np.array([info[k][0] for info in all_env_infos if k in info and len(info[k]) > 0])
+                    all_ks = np.concatenate([info[k] for info in all_env_infos if k in info and len(info[k]) > 0])
+                except (KeyError, IndexError, ValueError) as e:
+                    print(f"[WARNING] Skipping key {k} due to error: {e}")
+                    continue
+                
                 statistics.update(create_stats_ordered_dict(
                     stat_prefix + k,
                     final_ks,
@@ -69,8 +105,20 @@ def get_generic_path_information(paths, stat_prefix=''):
 
 
 def get_average_returns(paths):
-    returns = [sum(path["rewards"]) for path in paths]
-    return np.mean(returns)
+    # returns = [sum(path["rewards"]) for path in paths]
+    # return np.mean(returns)
+    returns = []
+    for i, path in enumerate(paths):
+        rewards = path.get("rewards", None)
+        if rewards is None or len(rewards) == 0:
+            continue  # skip invalid paths
+        try:
+            returns.append(np.sum(rewards).item())  # ensure float
+        except Exception as e:
+            print(f"[!] Skipping path {i} due to reward shape: {type(rewards)}, {rewards.shape}")
+            continue
+    return np.mean(returns) if returns else 0.0
+
 
 def get_num_rollout_success(paths):
     num_success = 0
@@ -106,12 +154,24 @@ def create_stats_ordered_dict(
         return ordered_dict
 
     if isinstance(data, list):
-        try:
-            iter(data[0])
-        except TypeError:
-            pass
-        else:
-            data = np.concatenate(data)
+        # try:
+        #     iter(data[0])
+        # except TypeError:
+        #     pass
+        # else:
+        #     data = [np.array(d) if not isinstance(d, np.ndarray) else d for d in data]
+        #     data = np.concatenate(data)
+        normalized_data = []
+        for d in data:
+            if isinstance(d, np.ndarray):
+                arr = d
+            else:
+                arr = np.array(d)
+            if arr.ndim == 0:
+                    arr = np.expand_dims(arr, 0)
+        normalized_data.append(arr)
+        data = np.concatenate(normalized_data)
+
 
     if (isinstance(data, np.ndarray) and data.size == 1
             and not always_show_all_stats):

@@ -4,7 +4,7 @@ import maple.util.hyperparameter as hyp
 import os.path as osp
 import argparse
 import json
-import collections
+from collections.abc import Mapping
 import copy
 
 from maple.launchers.conf import LOCAL_LOG_DIR
@@ -53,6 +53,12 @@ env_params = dict(
         'ckpt_path': [
             ### Add paths here ###
         ],
+    },
+    stack_three={
+        'ckpt_path': [
+            ### Add paths here ###
+        ],
+            
     },
     nut_round={
         'ckpt_path': [
@@ -103,7 +109,7 @@ def deep_update(source, overrides):
     Copied from: https://stackoverflow.com/questions/3232943/update-value-of-a-nested-dictionary-of-varying-depth
     '''
     for key, value in overrides.items():
-        if isinstance(value, collections.Mapping) and value:
+        if isinstance(value, Mapping) and value:
             returned = deep_update(source.get(key, {}), value)
             source[key] = returned
         else:
