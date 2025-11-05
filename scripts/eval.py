@@ -57,8 +57,12 @@ env_params = dict(
     stack_three={
         'ckpt_path': [
             ### Add paths here ###
-        ],
-            
+        ],     
+    },
+    arrange_three={
+        'ckpt_path': [
+            ### Add paths here ###
+        ],     
     },
     nut_round={
         'ckpt_path': [

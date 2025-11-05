@@ -178,6 +178,9 @@ env_params = dict(
     stack_three={
         'env_variant.env_type': ['StackThree'],
     },
+    arrange_three={
+        'env_variant.env_type': ['ArrangeThree'],
+    },
     nut={
         'env_variant.env_type': ['NutAssemblyRound'],
         'env_variant.env_kwargs.skill_config.grasp_config.aff_threshold': [0.06],
